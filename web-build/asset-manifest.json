@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.081f0174.chunk.js",
-    "app.js.map": "/static/js/app.081f0174.chunk.js.map",
+    "app.js": "/static/js/app.7b144642.chunk.js",
+    "app.js.map": "/static/js/app.7b144642.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.2e9f1821.js",
     "runtime~app.js.map": "/static/js/runtime~app.2e9f1821.js.map",
-    "static/js/2.6421241b.chunk.js": "/static/js/2.6421241b.chunk.js",
-    "static/js/2.6421241b.chunk.js.map": "/static/js/2.6421241b.chunk.js.map",
+    "static/js/2.ee6744f6.chunk.js": "/static/js/2.ee6744f6.chunk.js",
+    "static/js/2.ee6744f6.chunk.js.map": "/static/js/2.ee6744f6.chunk.js.map",
     "fonts/AntDesign.ttf": "/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/./fonts/Feather.ttf",
@@ -24,12 +24,12 @@
     "index.html": "/index.html",
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
-    "static/js/2.6421241b.chunk.js.LICENSE.txt": "/static/js/2.6421241b.chunk.js.LICENSE.txt",
+    "static/js/2.ee6744f6.chunk.js.LICENSE.txt": "/static/js/2.ee6744f6.chunk.js.LICENSE.txt",
     "static/media/arduino.png": "/static/media/arduino.8769f0a4.png"
   },
   "entrypoints": [
     "static/js/runtime~app.2e9f1821.js",
-    "static/js/2.6421241b.chunk.js",
-    "static/js/app.081f0174.chunk.js"
+    "static/js/2.ee6744f6.chunk.js",
+    "static/js/app.7b144642.chunk.js"
   ]
 }
