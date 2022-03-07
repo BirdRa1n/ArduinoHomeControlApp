@@ -27,7 +27,7 @@ import arduino from '../img/arduino.png';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { TouchableOpacity } from "react-native";
 
 
 export default function Login({ navigation }) {
@@ -58,7 +58,7 @@ export default function Login({ navigation }) {
                     setstatusLogin(response.data)
                 })
         }
-    
+
 
 
 
@@ -95,11 +95,11 @@ export default function Login({ navigation }) {
 
 
         }
-    
 
 
 
-       
+
+
 
 
         return <Box alignItems="center" w={'xs'} bg={'light.50'} borderRadius={10} shadow={5}>
@@ -113,7 +113,7 @@ export default function Login({ navigation }) {
                 <FormControl marginTop={5} isInvalid={userError}>
                     <Stack mx="4" >
                         <FormControl.Label >Usuário </FormControl.Label>
-                        <Input borderBottomColor={'light.200'} variant="underlined" type="user" placeholder="" 
+                        <Input borderBottomColor={'light.200'} variant="underlined" type="user" placeholder=""
                             onChangeText={(value) => setUsername(value)}
                         ></Input>
                         <FormControl.HelperText>
@@ -151,19 +151,11 @@ export default function Login({ navigation }) {
     };
     return (
         <NativeBaseProvider>
-            <Center
-                _dark={{ bg: "blueGray.900" }}
-                _light={{ bg: "violet.900" }}
-                px={4}
-                flex={1}
-
-            >
+            <Center _dark={{ bg: "blueGray.900" }} _light={{ bg: "violet.900" }} px={4} flex={1}>
                 <BoxForm></BoxForm>
-                <Heading top={4} size={'xs'} color={'#f5f3ff'}>Não possui conta? <Heading color={'white'} size={'xs'}>Clique aqui</Heading></Heading>
-
-
-
-
+                <TouchableOpacity onPress={() => navigation.navigate('SingUp')}>
+                    <Heading top={4} _web={{ marginTop: 4 }} size={'xs'} color={'#f5f3ff'}>Não possui conta? <Heading color={'white'} size={'xs'}>Clique aqui</Heading></Heading>
+                </TouchableOpacity>
             </Center>
         </NativeBaseProvider>
     );
