@@ -105,9 +105,9 @@ Para fazer o deploy desse projeto rode
 
 
 ## Documentação da API
-### Em desenvolvimento
-[ArduinoHomeControlAPI](https://apiarduinowebcontrol.herokuapp.com/)
 
+[ArduinoHomeControlAPI](https://apiarduinowebcontrol.herokuapp.com/)
+### Em desenvolvimento
 
 #### Sempre inicia-se com o Parâmetro req 
 
