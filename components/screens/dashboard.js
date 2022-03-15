@@ -56,6 +56,7 @@ export default function DashBorard({ navigation }) {
   function Exit() {
     var gg = AsyncStorage.setItem('token', '')
     var lgg = AsyncStorage.setItem('LoginSave', 'Login')
+    var ll = AsyncStorage.setItem('data_user', '')
     setTimeout(
       function () {
         navigation.navigate('Login')
@@ -63,12 +64,6 @@ export default function DashBorard({ navigation }) {
         .bind(this),
       2000
     );
-  }
-
-  function CancelLogin() {
-    var gg = AsyncStorage.setItem('token', '')
-    var lgg = AsyncStorage.setItem('LoginSave', 'Login')
-    navigation.navigate('Login')
   }
 
   const Head = () => {
