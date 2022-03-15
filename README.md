@@ -1,5 +1,5 @@
 
-# ArduinoHomeControl
+# ArduinoHomeControlApp
 
 O App é difercionado a controle residêncial com Arduino via comunicação WEB
 [ArduinoHomeControl](https://github.com/birdra1n/ArduinoHomeControl/)
