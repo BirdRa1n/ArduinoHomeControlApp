@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 import Login from './components/screens/Login';
 import DashBorard from './components/screens/dashboard';
 import SingUp from './components/screens/SingUp';
-
+import Acct from './components/screens/Acct';
 
 
 export default function App() {
@@ -38,6 +38,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="DashBorard" component={DashBorard} options={{ headerShown: false, headerBackVisible: false }} />
           <Stack.Screen name="SingUp" component={SingUp} options={{ headerShown: false, headerBackVisible: false }} />
+          <Stack.Screen name="Acct" component={Acct} options={{ headerShown: true, headerBackVisible: true, headerBackTitle: 'Voltar', headerTitle: "Conta" }} />
   
   
         </Stack.Navigator>

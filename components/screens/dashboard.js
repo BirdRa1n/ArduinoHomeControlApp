@@ -1,9 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react"
-import { NativeBaseProvider, Modal, Actionsheet, Spinner, useClipboard, Box, Text, Badge, Divider, Heading, VStack, Switch, FormControl, Input, Link, Button, Icon, HStack, Center, Pressable, View, Container, ZStack, ScrollView, Toast } from "native-base";
-import { TouchableOpacity } from "react-native";
+import { NativeBaseProvider, Collapse, Alert, Modal, Actionsheet, Spinner, useClipboard, Box, Text, Badge, Divider, Heading, VStack, Switch, FormControl, Input, Link, Button, Icon, HStack, Center, Pressable, View, Container, ZStack, ScrollView, Toast } from "native-base";
+import { TouchableOpacity, Platform } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
+import * as WebBrowser from 'expo-web-browser';
+
 import { Ionicons, AntDesign, FontAwesome, FontAwesome5, Entypo } from '@expo/vector-icons';
 
 export default function DashBorard({ navigation }) {
@@ -11,7 +13,13 @@ export default function DashBorard({ navigation }) {
   const { value, onCopy } = useClipboard();
   const [token, setToken] = React.useState("");
   const [data, setData] = React.useState("");
-  
+
+  const OpenGithubDocs = async () => {
+    let result = await WebBrowser.openBrowserAsync('https://github.com/birdra1n/arduinohomecontrol');
+  };
+
+
+
 
   const getData = async () => {
     try {
@@ -33,8 +41,15 @@ export default function DashBorard({ navigation }) {
       }
     })
       .then(function (response) {
-        console.log(response.data);
         setData(response.data)
+        var obj = {
+          "username": response.data.username,
+          "email": response.data.email,
+          "name": response.data.name,
+          "arduinoid": response.data.arduinoid,
+          "token": token
+        }
+        var ll = AsyncStorage.setItem('data_user', JSON.stringify(obj))
         setCopyText(response.data.arduinoid)
       })
   }
@@ -50,11 +65,20 @@ export default function DashBorard({ navigation }) {
     );
   }
 
-  const Head = () => {
-    return <Box>
-      <Box left={3} top={5}>
+  function CancelLogin() {
+    var gg = AsyncStorage.setItem('token', '')
+    var lgg = AsyncStorage.setItem('LoginSave', 'Login')
+    navigation.navigate('Login')
+  }
 
-        <HStack justifyContent="space-between" w={'90%'}>
+  const Head = () => {
+    return <Box _web={{
+      marginBottom: 41,
+      top: 4
+    }}>
+      <Box top={5}>
+
+        <HStack left={3} justifyContent="space-between" w={'90%'}>
           <Heading fontSize={30}>Olá, {data.name}</Heading>
           <Center>
             <Ionicons name="exit-outline" size={30} color="black" onPress={() => Exit()} />
@@ -62,19 +86,25 @@ export default function DashBorard({ navigation }) {
         </HStack>
 
         <TouchableOpacity onPress={() => onCopy(copyText)}>
-          <HStack space={1}>
+          <HStack left={3} space={1}>
             <Heading fontSize={15} color={'violet.600'}>Arduino ID: {data.arduinoid}</Heading>
           </HStack>
         </TouchableOpacity>
+        <Box >
 
+        </Box>
       </Box>
+
     </Box>;
   };
+
+
   const OptionsBody = () => {
     const [showModal, setShowModal] = useState(false);
-    const [Switch_1, setSwitch_1] = useState();
-    const [Switch_2, setSwitch_2] = useState();
-    const [Switch_3, setSwitch_3] = useState();
+
+    const [Switch_1, setSwitch_1] = React.useState();
+    const [Switch_2, setSwitch_2] = React.useState();
+    const [Switch_3, setSwitch_3] = React.useState();
     const [Switch_4, setSwitch_4] = React.useState();
     const [Switch_5, setSwitch_5] = React.useState();
     const [Switch_6, setSwitch_6] = React.useState();
@@ -87,92 +117,95 @@ export default function DashBorard({ navigation }) {
     const [Switch_13, setSwitch_13] = React.useState();
     const [Switch_14, setSwitch_14] = React.useState();
     const [Switch_15, setSwitch_15] = React.useState();
-    const [data_lights, setdata_lights] = useState();
-  
-    if (Switch_1 == true) {
-      var light_opt1 = "1"
-    } else {
-      var light_opt1 = "0"
-    }
-    if (Switch_2 == true) {
-      var light_opt2 = "1"
-    } else {
-      var light_opt2 = "0"
-    }
-    if (Switch_3 == true) {
-      var light_opt3 = "1"
-    } else {
-      var light_opt3 = "0"
-    }
-    if (Switch_4 == true) {
-      var light_opt4 = "1"
-    } else {
-      var light_opt4 = "0"
-    }
-    if (Switch_5 == true) {
-      var light_opt5 = "1"
-    } else {
-      var light_opt5 = "0"
-    }
-  
-    if (Switch_6 == true) {
-      var light_opt6 = "1"
-    } else {
-      var light_opt6 = "0"
-    }
-    if (Switch_7 == true) {
-      var light_opt7 = "1"
-    } else {
-      var light_opt7 = "0"
-    }
-    if (Switch_8 == true) {
-      var light_opt8 = "1"
-    } else {
-      var light_opt8 = "0"
-    }
-    if (Switch_9 == true) {
-      var light_opt9 = "1"
-    } else {
-      var light_opt9 = "0"
-    }
-    if (Switch_10 == true) {
-      var light_opt10 = "1"
-    } else {
-      var light_opt10 = "0"
-    }
-    if (Switch_11 == true) {
-      var light_opt11 = "1"
-    } else {
-      var light_opt11 = "0"
-    }
-    if (Switch_12 == true) {
-      var light_opt12 = "1"
-    } else {
-      var light_opt12 = "0"
-    }
-    if (Switch_13 == true) {
-      var light_opt13 = "1"
-    } else {
-      var light_opt13 = "0"
-    }
-    if (Switch_14 == true) {
-      var light_opt14 = "1"
-    } else {
-      var light_opt14 = "0"
-    }
-    if (Switch_15 == true) {
-      var light_opt15 = "1"
-    } else {
-      var light_opt15 = "0"
-    }
-  
+
+
+
     function SetandGetDataLights() {
+
+      const [data_lights, setdata_lights] = useState();
+
+      if (Switch_1 == true) {
+        var light_opt1 = "1"
+      } else {
+        var light_opt1 = "0"
+      }
+      if (Switch_2 == true) {
+        var light_opt2 = "1"
+      } else {
+        var light_opt2 = "0"
+      }
+      if (Switch_3 == true) {
+        var light_opt3 = "1"
+      } else {
+        var light_opt3 = "0"
+      }
+      if (Switch_4 == true) {
+        var light_opt4 = "1"
+      } else {
+        var light_opt4 = "0"
+      }
+      if (Switch_5 == true) {
+        var light_opt5 = "1"
+      } else {
+        var light_opt5 = "0"
+      }
+
+      if (Switch_6 == true) {
+        var light_opt6 = "1"
+      } else {
+        var light_opt6 = "0"
+      }
+      if (Switch_7 == true) {
+        var light_opt7 = "1"
+      } else {
+        var light_opt7 = "0"
+      }
+      if (Switch_8 == true) {
+        var light_opt8 = "1"
+      } else {
+        var light_opt8 = "0"
+      }
+      if (Switch_9 == true) {
+        var light_opt9 = "1"
+      } else {
+        var light_opt9 = "0"
+      }
+      if (Switch_10 == true) {
+        var light_opt10 = "1"
+      } else {
+        var light_opt10 = "0"
+      }
+      if (Switch_11 == true) {
+        var light_opt11 = "1"
+      } else {
+        var light_opt11 = "0"
+      }
+      if (Switch_12 == true) {
+        var light_opt12 = "1"
+      } else {
+        var light_opt12 = "0"
+      }
+      if (Switch_13 == true) {
+        var light_opt13 = "1"
+      } else {
+        var light_opt13 = "0"
+      }
+      if (Switch_14 == true) {
+        var light_opt14 = "1"
+      } else {
+        var light_opt14 = "0"
+      }
+      if (Switch_15 == true) {
+        var light_opt15 = "1"
+      } else {
+        var light_opt15 = "0"
+      }
+
       axios.get('https://apiarduinowebcontrol.herokuapp.com/', {
         params: {
           req: 'arduino',
           arduinoid: data.arduinoid,
           setLights: 'yes',
-          getLights: 'yes',
           light_1: light_opt1,
           light_2: light_opt2,
           light_3: light_opt3,
@@ -191,42 +224,44 @@ export default function DashBorard({ navigation }) {
         }
       })
         .then(function (response) {
-          setdata_lights(JSON.stringify(response.data))
         })
     }
-    SetandGetDataLights()   
+    SetandGetDataLights()
     return <Box bg={'violet.800'} w={'100%'} h={'81%'} borderTopRadius={45} shadow={5}>
       <Center>
-        <ScrollView borderRadius={10} horizontal={true} w={'80%'} h={81} top={3} showsHorizontalScrollIndicator={false}>
-          <HStack space={4}>
-            <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
-              <Center top={4}>
-                <Heading fontSize={30}>0</Heading>
-                <Heading fontSize={10}>Luzes ligadas</Heading>
-              </Center>
-            </Box>
-            <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
-              <Center top={4}>
-                <AntDesign name="user" size={35} color="black" />
-                <Heading fontSize={10}>Conta</Heading>
-              </Center>
-            </Box>
-            <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
-              <Center top={4}>
-                <AntDesign name="github" size={35} color="black" />
-                <Heading fontSize={10}>Docs GitHub</Heading>
-              </Center>
-            </Box>
-            <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
-              <Center top={4}>
-                <AntDesign name="setting" size={35} color="black" />
-                <Heading fontSize={10}>Configurações</Heading>
-              </Center>
-            </Box>
-          </HStack>
-        </ScrollView>
+        <ScrollView borderRadius={10} horizontal={true} w={'90%'} h={81} top={3} showsHorizontalScrollIndicator={false}>
+          <HStack space={9} >
 
-      </Center>
+            <TouchableOpacity onPress={() => navigation.navigate("Acct")}>
+              <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
+                <Center top={4}>
+                  <AntDesign name="user" size={35} color="black" />
+                  <Heading fontSize={10}>Conta</Heading>
+                </Center>
+              </Box>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => OpenGithubDocs()}>
+              <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
+                <Center top={4}>
+                  <AntDesign name="github" size={35} color="black" />
+                  <Heading fontSize={10}>Docs GitHub</Heading>
+                </Center>
+              </Box>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => alert('A opção não está disponível!')}>
+              <Box w={100} h={'100%'} bg={'light.100'} borderRadius={10} shadow={5}>
+                <Center top={3.5}>
+                  <Ionicons name="hardware-chip" size={35} color="black" />
+                  <Heading fontSize={10}>Arduino</Heading>
+                </Center>
+              </Box>
+            </TouchableOpacity>
+
+          </HStack>
+
+        </ScrollView>
+        </Center>
+
 
       <Box bg={'violet.700'} w={'100%'} h={'80%'} top={'5%'} borderTopRadius={45} shadow={5} >
         <Center top={50}>
@@ -376,27 +411,34 @@ export default function DashBorard({ navigation }) {
               <Center>
                 <Entypo name="light-bulb" size={54} color="#f5f5f4" />
                 <Heading fontSize={20} color={'#f5f5f4'}>Luzes</Heading>
-                <Badge bg={'#FF0000'} borderRadius={10} _text={{ fontSize: 8, color: 'white' }}>Em desenvolvimento</Badge>
               </Center>
             </Button>
 
-            <Button shadow={1} colorScheme={'lightBlue'} bg={'lightBlue.500'} w={'40%'} h={120} borderRadius={10}>
+            <Button shadow={1} colorScheme={'lightBlue'} bg={'lightBlue.500'} w={'40%'} h={120} borderRadius={10} onPress={() => alert('Essa função não está disponível na versão pública')}>
               <Center>
                 <FontAwesome name="thermometer-4" size={54} color="#f5f5f4" />
                 <Heading fontSize={20} color={'#f5f5f4'}>AC</Heading>
               </Center>
-              <Badge bg={'#FF0000'} borderRadius={10} _text={{ fontSize: 8, color: 'white' }}>Em desenvolvimento</Badge>
             </Button>
 
           </HStack>
+          <HStack space={9} _web={{ w: '60%', alignContent: 'center', alignItems: 'center' }}>
 
-          <Button shadow={1} colorScheme={'indigo'} bg={'indigo.500'} w={'90%'} h={120} top={5} borderRadius={10}>
-            <Center >
-              <FontAwesome5 name="faucet" size={54} color="#f5f5f4" />
-              <Heading fontSize={20} color={'#f5f5f4'}>Jardim</Heading>
-              <Badge bg={'#FF0000'} borderRadius={10} _text={{ fontSize: 8, color: 'white' }}>Em desenvolvimento</Badge>
-            </Center>
-          </Button>
+
+            <Button shadow={1} colorScheme={'indigo'} bg={'indigo.500'} w={'40%'} h={120} top={5} borderRadius={10} onPress={() => alert('Essa função não está disponível na versão pública')}>
+              <Center >
+                <FontAwesome5 name="faucet" size={54} color="#f5f5f4" />
+                <Heading fontSize={20} color={'#f5f5f4'}>Jardim</Heading>
+              </Center>
+            </Button>
+
+            <Button shadow={1} colorScheme={'indigo'} bg={'indigo.600'} w={'40%'} h={120} top={5} borderRadius={10} onPress={() => alert('Essa função não está disponível na versão pública')}>
+              <Center >
+                <FontAwesome5 name="door-closed" size={54} color="#f5f5f4" />
+                <Heading fontSize={20} color={'#f5f5f4'}>Garagem</Heading>
+              </Center>
+            </Button>
+          </HStack>
 
         </Center>
 
@@ -411,14 +453,14 @@ export default function DashBorard({ navigation }) {
       </Box>
 
     </Box>;
-    
+
   };
 
   if (data.warning == "valid token") {
+
     return (
       <NativeBaseProvider>
         <Center w={'100%'} h={'100%'} safeAreaBottom>
-
           <Box safeAreaTop w={'100%'} h={'100%'} maxW={580} justifyContent="space-between">
             <Head></Head>
             <OptionsBody></OptionsBody>
@@ -430,18 +472,84 @@ export default function DashBorard({ navigation }) {
   }
 
   else {
-    GetDataAccont()
-    return (
-      <NativeBaseProvider>
-        <Center bg={'#581c87'} w={'100%'} h={'100%'} safeAreaBottom>
-          <HStack space={2} justifyContent="center">
-            <Spinner accessibilityLabel="Loading posts" color={'white'} />
-            <Heading color="white" fontSize="md">
-              Carregando
-            </Heading>
-          </HStack>
-        </Center>
-      </NativeBaseProvider>
-    )
+
+
+    if (Platform.OS == "web") {
+      setTimeout(
+        function () {
+          GetDataAccont()
+        }
+          .bind(this),
+        1000
+      );
+      return (
+        <NativeBaseProvider>
+          <Center bg={'#581c87'} w={'100%'} h={'100%'} safeAreaBottom>
+            <VStack space={5}>
+            <HStack space={2} justifyContent="center">
+              <Spinner accessibilityLabel="Loading posts" color={'white'} />
+              <Heading color="white" fontSize="md">
+                Carregando
+              </Heading>
+            </HStack>
+            <Alert top={3} w="100%" maxW={300} colorScheme="violet" status="info">
+              <VStack space={1} flexShrink={1} w="100%" alignItems="center">
+                <Alert.Icon size="md" />
+                <Text fontSize="md" fontWeight="medium" _dark={{
+                  color: "coolGray.800"
+                }}>
+                  Aviso
+                </Text>
+
+                <Box _text={{
+                  textAlign: "center"
+                }} _dark={{
+                  _text: {
+                    color: "coolGray.600"
+                  }
+                }}>
+                  Você está utilizando a versão WEB. Avisamos que essa versão é apenas para demonstração e não funciona corretamente!
+                  <Center>
+                    <Link href="https://expo.dev/@dariojunior.dev/projects/ArduinoHomeControl">Baixe o app para melhor experiência</Link>
+                  </Center>
+                </Box>
+
+              </VStack>
+            </Alert>
+            <Center>
+            <TouchableOpacity onPress={() => Exit()}>
+              <Heading fontSize={10} color="white">Está demorando? Clique aqui para cancelar</Heading>
+            </TouchableOpacity>
+            </Center>
+            </VStack>
+          </Center>
+        </NativeBaseProvider>
+      );
+
+    } else {
+      GetDataAccont()
+      return (
+        <NativeBaseProvider>
+          <View justifyContent="space-between">
+            <Center bg={'#581c87'} w={'100%'} h={'100%'} safeAreaBottom >
+              <VStack space={5}>
+                <HStack space={2} justifyContent="center">
+                  <Spinner accessibilityLabel="Loading posts" color={'white'} />
+                  <Heading color="white" fontSize="md">
+                    Carregando
+                  </Heading>
+                </HStack>
+                <TouchableOpacity onPress={() => Exit()}>
+                  <Heading fontSize={10} color="white">Está demorando? Clique aqui para cancelar</Heading>
+                </TouchableOpacity>
+              </VStack>
+
+            </Center>
+       
+          </View>
+        </NativeBaseProvider>
+      )
+    }
   }
 }
+//              <Badge bg={'#FF0000'} borderRadius={10} _text={{ fontSize: 8, color: 'white' }}>Em desenvolvimento</Badge>

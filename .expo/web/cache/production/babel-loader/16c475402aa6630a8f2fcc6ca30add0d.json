@@ -1,0 +1,1 @@
+{"ast":null,"code":"import{HStack}from\"../Stack\";export{HStack as Row};","map":{"version":3,"sources":["index.tsx"],"names":["HStack"],"mappings":"AAAA,OAAA,MAAA,gBACA,OAASA,MAAM,GAAf,CAAA,GAAA","sourcesContent":["import { HStack } from '../Stack';\nexport { HStack as Row };\n"]},"metadata":{},"sourceType":"module"}
