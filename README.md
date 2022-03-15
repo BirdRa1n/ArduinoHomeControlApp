@@ -105,6 +105,7 @@ Para fazer o deploy desse projeto rode
 
 
 ## Documentação da API
+### Em desenvolvimento
 [ArduinoHomeControlAPI](https://apiarduinowebcontrol.herokuapp.com/)
 
 
